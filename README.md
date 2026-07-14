@@ -1,0 +1,1 @@
+When want to upload a new version of the website. Go to GitHub, go to New Branch and click new branch. Then upload the new file making sure it is named index.html. Once you upload it, Netlify should automatically pick up on the change and push it to the web. 
