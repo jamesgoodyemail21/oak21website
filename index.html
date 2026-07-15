@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Oak 21 Real Estate LLC | Private Equity Real Estate</title>
+<title>Oak 21 Real Estate LLC | Execution Partner for Family Offices &amp; Real Estate Operators</title>
+<meta name="description" content="Oak 21 Real Estate is the execution partner for sponsors, family offices, and operators who need institutional-grade real estate expertise without building it in-house."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -83,9 +84,9 @@ header {
 .metrics-head-label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.92); }
 .metrics-head-geo   { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #d4a017; }
 .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-.kpi { padding: 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(138,110,30,0.12); transition: background 0.2s; }
+.kpi { padding: 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(138,110,30,0.12); transition: background 0.2s; display: flex; flex-direction: column-reverse; gap: 0; }
 .kpi:hover { background: rgba(138,110,30,0.07); }
-.kpi-num   { font-family: 'Cormorant Garant', serif; font-size: 38px; font-weight: 500; color: #ffffff; line-height: 1; margin-bottom: 5px; letter-spacing: -0.02em; }
+.kpi-num, dd.kpi-num, .kpi-num { font-family: 'Cormorant Garant', serif; font-size: 38px; font-weight: 500; color: #ffffff; line-height: 1; margin-bottom: 5px; letter-spacing: -0.02em; }
 .kpi-num span { color: #d4a017; }
 .kpi-label { font-size: 12px; color: rgba(255,255,255,0.92); line-height: 1.4; text-transform: uppercase; letter-spacing: 0.3px; }
 
@@ -209,7 +210,51 @@ footer { background: #16253a; border-top: 1px solid rgba(138,110,30,0.12); paddi
 /* ── CURSOR GLOW ── */
 #cursor-glow { position: fixed; width: 320px; height: 320px; border-radius: 50%; pointer-events: none; z-index: 9997; opacity: 0; background: radial-gradient(circle, rgba(138,110,30,0.07) 0%, transparent 70%); transform: translate(-50%, -50%); transition: opacity 0.5s; }
 
-/* ── RESPONSIVE ── */
+/* ── ACCESSIBILITY ── */
+
+/* Skip to main content */
+.skip-link {
+  position: absolute; top: -100px; left: 16px; z-index: 9999;
+  background: #ffffff; color: #1e3a52;
+  font-size: 14px; font-weight: 600; padding: 12px 20px;
+  border: 2px solid #d4a017;
+  transition: top 0.2s;
+  text-decoration: none;
+}
+.skip-link:focus { top: 16px; }
+
+/* Visible focus rings for keyboard nav */
+*:focus-visible {
+  outline: 3px solid #d4a017;
+  outline-offset: 3px;
+}
+a:focus-visible, button:focus-visible {
+  outline: 3px solid #d4a017;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.navlinks a:focus-visible { color: #d4a017; }
+.btn-gold:focus-visible { outline-offset: 4px; }
+.nav-cta:focus-visible { background: var(--gold); color: var(--ink); }
+
+/* Reduced motion — respects OS setting */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .sr { opacity: 1 !important; transform: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* High contrast mode */
+@media (forced-colors: active) {
+  .brand-mark { border-color: ButtonText; }
+  .btn-gold { background: ButtonText; color: ButtonFace; }
+  .section-tag::before { background: ButtonText; }
+}
+
 @media (max-width: 1024px) {
   .wrap { padding: 0 24px; }
   .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 48px 24px 60px; }
@@ -238,17 +283,19 @@ footer { background: #16253a; border-top: 1px solid rgba(138,110,30,0.12); paddi
 </head>
 <body>
 
-<div id="cursor-glow"></div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<div id="cursor-glow" aria-hidden="true"></div>
 
 <!-- NAV -->
-<header>
+<header role="banner">
   <div class="nav-inner">
-    <a href="#" class="brand">
-      <div class="brand-mark"><span>21</span></div>
+    <a href="#" class="brand" aria-label="Oak 21 Real Estate — home">
+      <div class="brand-mark" aria-hidden="true"><span>21</span></div>
       <span class="brand-name">Oak <em>21</em> Real Estate</span>
     </a>
-    <nav>
-      <ul class="navlinks">
+    <nav aria-label="Main navigation">
+      <ul class="navlinks" role="list">
         <li><a href="#sectors">Sectors</a></li>
         <li><a href="#strategy">Strategy</a></li>
         <li><a href="#engage">Engagement</a></li>
@@ -258,17 +305,18 @@ footer { background: #16253a; border-top: 1px solid rgba(138,110,30,0.12); paddi
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <a href="#contact" class="nav-cta">Inquire</a>
+    <a href="#contact" class="nav-cta" aria-label="Contact Oak 21">Inquire</a>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-lines"></div>
+<main id="main-content">
+<section class="hero" aria-label="Introduction">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-lines" aria-hidden="true"></div>
   <div class="hero-inner">
     <div>
-      <div class="hero-eyebrow"><span>Execution Partner for Family Offices &amp; Real Estate Operators</span></div>
+      <div class="hero-eyebrow" aria-hidden="true"><span>Execution Partner for Family Offices &amp; Real Estate Operators</span></div>
       <h1>Quality real estate execution for <em>deal sponsors,</em> LPs, and operators.</h1>
       <p class="hero-desc">Oak 21 Real Estate is the execution partner for sponsors, family offices, and operators who need institutional-grade real estate expertise without building it in-house.</p>
       <div class="hero-btns">
@@ -276,25 +324,25 @@ footer { background: #16253a; border-top: 1px solid rgba(138,110,30,0.12); paddi
         <a href="#why" class="btn-ghost">Why Oak 21 &darr;</a>
       </div>
     </div>
-    <div class="metrics-panel">
+    <div class="metrics-panel" role="region" aria-label="Platform overview statistics">
       <div class="metrics-head">
         <span class="metrics-head-label">Platform Overview</span>
         <span class="metrics-head-geo">United States</span>
       </div>
-      <div class="kpi-grid">
-        <div class="kpi"><div class="kpi-num" data-target="8" data-prefix="$" data-suffix="B+">$8B+</div><div class="kpi-label">Transaction Experience</div></div>
-        <div class="kpi"><div class="kpi-num" data-target="40000" data-prefix="" data-suffix="+">40,000+</div><div class="kpi-label">Apartment Units</div></div>
-        <div class="kpi"><div class="kpi-num" data-target="4" data-prefix="$" data-suffix="B+">$4B+</div><div class="kpi-label">Debt Structured</div></div>
-        <div class="kpi"><div class="kpi-num" data-target="1500" data-prefix="" data-suffix="+">1,500+</div><div class="kpi-label">SFR Units</div></div>
-        <div class="kpi"><div class="kpi-num" data-target="300" data-prefix="$" data-suffix="M+">$300M+</div><div class="kpi-label">Equity Raised</div></div>
-        <div class="kpi"><div class="kpi-num" data-target="1" data-prefix="" data-suffix="M+">1M+</div><div class="kpi-label">Sq Ft Commercial &amp; Office</div></div>
-      </div>
+      <dl class="kpi-grid">
+        <div class="kpi"><dt class="kpi-label">Transaction Experience</dt><dd class="kpi-num" data-target="8" data-prefix="$" data-suffix="B+">$8B+</dd></div>
+        <div class="kpi"><dt class="kpi-label">Apartment Units</dt><dd class="kpi-num" data-target="40000" data-prefix="" data-suffix="+">40,000+</dd></div>
+        <div class="kpi"><dt class="kpi-label">Debt Structured</dt><dd class="kpi-num" data-target="4" data-prefix="$" data-suffix="B+">$4B+</dd></div>
+        <div class="kpi"><dt class="kpi-label">SFR Units</dt><dd class="kpi-num" data-target="1500" data-prefix="" data-suffix="+">1,500+</dd></div>
+        <div class="kpi"><dt class="kpi-label">Equity Raised</dt><dd class="kpi-num" data-target="300" data-prefix="$" data-suffix="M+">$300M+</dd></div>
+        <div class="kpi"><dt class="kpi-label">Sq Ft Commercial &amp; Office</dt><dd class="kpi-num" data-target="1" data-prefix="" data-suffix="M+">1M+</dd></div>
+      </dl>
     </div>
   </div>
 </section>
 
 <!-- INTRO BAND -->
-<div class="intro-band">
+<div class="intro-band" role="region" aria-label="Our approach">
   <div class="wrap">
     <div class="intro-inner">
       <div style="flex:1;max-width:760px">
@@ -306,10 +354,10 @@ footer { background: #16253a; border-top: 1px solid rgba(138,110,30,0.12); paddi
 </div>
 
 <!-- SECTORS -->
-<section class="section dark" id="sectors">
+<section class="section dark" id="sectors" aria-labelledby="sectors-heading">
   <div class="wrap">
     <div class="section-tag sr"><span>Sectors</span></div>
-    <h2 class="section-title sr" style="transition-delay:0.1s">Sectors We Service</h2>
+    <h2 id="sectors-heading" class="section-title sr" style="transition-delay:0.1s">Sectors We Service</h2>
     <p class="section-lead sr" style="transition-delay:0.2s">Deep operational and transactional expertise across asset classes and investment strategies.</p>
     <div class="sector-grid">
       <div class="sector-card sr" style="transition-delay:0.05s">
@@ -332,12 +380,12 @@ footer { background: #16253a; border-top: 1px solid rgba(138,110,30,0.12); paddi
 </section>
 
 <!-- STRATEGY -->
-<section class="section light" id="strategy">
+<section class="section light" id="strategy" aria-labelledby="strategy-heading">
   <div class="wrap">
     <div class="strategy-layout">
       <div>
         <div class="section-tag sr"><span>Strategy</span></div>
-        <h2 class="section-title sr" style="transition-delay:0.1s">Private Equity Strategy Expertise</h2>
+        <h2 id="strategy-heading" class="section-title sr" style="transition-delay:0.1s">Private Equity Strategy Expertise</h2>
         <div class="strategy-accent"></div>
         <p class="section-lead sr" style="transition-delay:0.2s;margin-bottom:0">Full-lifecycle execution — from underwriting and capital markets to operations, reporting, and exit.</p>
       </div>
@@ -354,24 +402,24 @@ footer { background: #16253a; border-top: 1px solid rgba(138,110,30,0.12); paddi
 </section>
 
 <!-- ENGAGEMENT -->
-<section class="section mid" id="engage">
+<section class="section mid" id="engage" aria-labelledby="engage-heading">
   <div class="wrap">
     <div class="section-tag sr"><span>Engagement</span></div>
-    <h2 class="section-title sr" style="transition-delay:0.1s">How We Engage</h2>
+    <h2 id="engage-heading" class="section-title sr" style="transition-delay:0.1s">How We Engage</h2>
     <p class="section-lead sr" style="transition-delay:0.2s">Flexible engagement structures designed around the specific needs of each partner.</p>
     <div class="engage-grid">
       <div class="engage-card sr" style="transition-delay:0.05s">
-        <div class="engage-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+        <div class="engage-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
         <h3>Project-Based Execution</h3>
         <p>Discrete underwriting, capital structuring, lender negotiations, or portfolio-level analysis on a defined scope and timeline.</p>
       </div>
       <div class="engage-card sr" style="transition-delay:0.15s">
-        <div class="engage-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="engage-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <h3>Embedded Partner Support</h3>
         <p>Ongoing integration alongside sponsors and GPs as a seamless extension of the investment team across all functions.</p>
       </div>
       <div class="engage-card sr" style="transition-delay:0.25s">
-        <div class="engage-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+        <div class="engage-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
         <h3>Portfolio &amp; Exit Readiness</h3>
         <p>Disciplined reporting, buyer positioning, refinance execution, and full disposition support from preparation through close.</p>
       </div>
@@ -380,10 +428,10 @@ footer { background: #16253a; border-top: 1px solid rgba(138,110,30,0.12); paddi
 </section>
 
 <!-- COUNTERPARTIES -->
-<section class="section dark" id="counterparties">
+<section class="section dark" id="counterparties" aria-labelledby="counterparties-heading">
   <div class="wrap">
     <div class="section-tag sr"><span>Who We Serve</span></div>
-    <h2 class="section-title sr" style="transition-delay:0.1s">Who We Serve</h2>
+    <h2 id="counterparties-heading" class="section-title sr" style="transition-delay:0.1s">Who We Serve</h2>
     <p class="section-lead sr" style="transition-delay:0.2s">Serving institutions, operators, and capital partners across the real estate ecosystem.</p>
     <div class="cp-list">
       <div class="cp-item sr" style="transition-delay:0.05s"><div class="cp-label"><h3>Sponsors &amp; Private Equity GPs</h3></div><div class="cp-detail"><p>Decision-grade underwriting, capital structuring, operational scaling, and comprehensive exit execution for sponsor-backed platforms.</p></div></div>
@@ -394,12 +442,12 @@ footer { background: #16253a; border-top: 1px solid rgba(138,110,30,0.12); paddi
 </section>
 
 <!-- WHY OAK 21 -->
-<section class="section light" id="why">
+<section class="section light" id="why" aria-labelledby="why-heading">
   <div class="wrap">
     <div class="why-layout">
       <div>
         <div class="section-tag sr"><span>Why Oak 21</span></div>
-        <h2 class="section-title sr" style="transition-delay:0.1s">Full Execution Power, Without the Overhead</h2>
+        <h2 id="why-heading" class="section-title sr" style="transition-delay:0.1s">Full Execution Power, Without the Overhead</h2>
         <p class="why-body sr" style="transition-delay:0.15s">Sponsors and capital partners often reach a point where execution capacity becomes the constraint — not deal flow. Hiring internally can be slow, expensive, and still leave gaps across underwriting, operations, and capital markets.</p>
         <p class="why-body sr" style="transition-delay:0.25s">Oak 21 provides a full execution layer immediately. We integrate at the partner level and deliver decision-grade underwriting, disciplined reporting, and capital markets readiness without adding fixed infrastructure.</p>
         <div class="why-points">
@@ -421,10 +469,10 @@ footer { background: #16253a; border-top: 1px solid rgba(138,110,30,0.12); paddi
 </section>
 
 <!-- PARTNERS -->
-<section class="section dark" id="partners">
+<section class="section dark" id="partners" aria-labelledby="partners-heading">
   <div class="wrap">
     <div class="section-tag sr"><span>Leadership</span></div>
-    <h2 class="section-title sr" style="transition-delay:0.1s">The Partners</h2>
+    <h2 id="partners-heading" class="section-title sr" style="transition-delay:0.1s">The Partners</h2>
     <p class="section-lead sr" style="transition-delay:0.2s">Practitioners with direct principal experience — and a proven track record of helping smaller companies scale across the United States.</p>
     <div class="partners-grid">
       <div class="partner-card sr" style="transition-delay:0.1s">
@@ -460,14 +508,14 @@ footer { background: #16253a; border-top: 1px solid rgba(138,110,30,0.12); paddi
 </section>
 
 <!-- CONTACT -->
-<section class="section dark" id="contact">
+<section class="section dark" id="contact" aria-labelledby="contact-heading">
   <div class="wrap">
     <div class="contact-layout">
       <div>
         <div class="section-tag sr"><span>Contact</span></div>
-        <h2 class="section-title sr" style="transition-delay:0.1s">Contact Oak 21</h2>
+        <h2 id="contact-heading" class="section-title sr" style="transition-delay:0.1s">Contact Oak 21</h2>
         <p class="section-lead sr" style="transition-delay:0.2s;margin-bottom:0">For partnership inquiries, capital markets discussions, and engagement opportunities.</p>
-        <span class="contact-email sr" id="contact-link" style="transition-delay:0.3s">info&#64;oak21re&#46;com</span>
+        <a class="contact-email sr" id="contact-link" href="mailto:info@oak21re.com" aria-label="Email Oak 21 at info@oak21re.com" style="transition-delay:0.3s">info@oak21re.com</a>
         <p class="contact-note sr" style="transition-delay:0.4s">Communications are intended for qualified counterparties and are provided for informational purposes only. This does not constitute an offer to sell or solicitation of an offer to buy any securities.</p>
       </div>
       <div class="contact-box sr" style="transition-delay:0.2s">
@@ -480,7 +528,8 @@ footer { background: #16253a; border-top: 1px solid rgba(138,110,30,0.12); paddi
 </section>
 
 <!-- FOOTER -->
-<footer>
+</main>
+<footer role="contentinfo" aria-label="Site footer">
   <div class="wrap">
     <div class="footer-inner">
       <div class="footer-brand">Oak <em>21</em> Real Estate LLC &nbsp;&middot;&nbsp; &copy; <span id="yr"></span></div>
@@ -492,13 +541,6 @@ footer { background: #16253a; border-top: 1px solid rgba(138,110,30,0.12); paddi
 <script>
 // Year
 document.getElementById('yr').textContent = new Date().getFullYear();
-
-// Email link (encoded to avoid scrapers and CF injection)
-(function() {
-  var el = document.getElementById('contact-link');
-  var addr = 'info' + '@' + 'oak21re' + '.' + 'com';
-  el.addEventListener('click', function() { window.location.href = 'mailto:' + addr; });
-})();
 
 // Scroll reveal
 (function() {
@@ -578,7 +620,8 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 (function() {
   if (window.matchMedia('(pointer: coarse)').matches) return;
   var g = document.getElementById('cursor-glow');
-  var mx = 0, my = 0, cx = 0, cy = 0, raf;
+  if (!g) return;
+  var mx = 0, my = 0, cx = 0, cy = 0;
   document.addEventListener('mousemove', function(e) {
     mx = e.clientX; my = e.clientY;
     g.style.opacity = '1';
@@ -589,7 +632,7 @@ document.getElementById('yr').textContent = new Date().getFullYear();
     cy += (my - cy) * 0.1;
     g.style.left = cx + 'px';
     g.style.top  = cy + 'px';
-    raf = requestAnimationFrame(loop);
+    requestAnimationFrame(loop);
   }
   loop();
 })();
